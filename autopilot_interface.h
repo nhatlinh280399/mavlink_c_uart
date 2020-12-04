@@ -155,7 +155,8 @@ struct Time_Stamps
 	uint64_t position_target_global_int;
 	uint64_t highres_imu;
 	uint64_t attitude;
-	uint64_t gps;
+	uint64_t gps_raw_int;
+	uint64_t altitude;
 
 	void
 	reset_timestamps()
@@ -170,6 +171,8 @@ struct Time_Stamps
 		position_target_global_int = 0;
 		highres_imu = 0;
 		attitude = 0;
+		gps_raw_int = 0;
+		altitude = 0;
 	}
 
 };
@@ -211,6 +214,12 @@ struct Mavlink_Messages {
 
 	// Attitude
 	mavlink_attitude_t attitude;
+	
+	//GPS
+	mavlink_gps_raw_int_t gps_raw_int;
+	
+	//Altitude
+	mavlink_altitude_t altitude;
 
 	// System Parameters?
 

@@ -71,9 +71,9 @@ top (int argc, char **argv)
 #ifdef __APPLE__
 	char *uart_name = (char*)"/dev/tty.usbmodem1";
 #else
-	char *uart_name = (char*)"/dev/ttyUSB0";
+	char *uart_name = (char*)"/dev/ttyS0";
 #endif
-	int baudrate = 57600;
+	int baudrate = 921600;
 
 	bool use_udp = false;
 	char *udp_ip = (char*)"127.0.0.1";
@@ -464,5 +464,6 @@ main(int argc, char **argv)
 	}
 
 }
+
 
 

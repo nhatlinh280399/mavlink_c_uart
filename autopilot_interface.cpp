@@ -352,6 +352,22 @@ read_messages()
 					this_timestamps.attitude = current_messages.time_stamps.attitude;
 					break;
 				}
+				
+				case MAVLINK_MSG_ID_ALTITUDE:
+				{
+					mavlink_msg_altitude_decode(&message, &(current_messages.altitude));
+					//current_messages.time_stamps.altitude = get_time_usec();
+					//this_timestamps.altitude = current_messages.time_stamps.altitude;
+					break;
+				}	
+				
+				case MAVLINK_MSG_ID_GPS_RAW_INT:
+				{
+					mavlink_msg_gps_raw_int_decode(&message, (&current_messages.gps_raw_int));
+					//current_messages.time_stamps.gps_raw_int = get_time_usec();
+					//this_timestamps.gps_raw_int = current_messages.gps_raw_int;
+					break;
+				}
 
 				default:
 				{
@@ -695,14 +711,15 @@ start()
 	printf("INITIAL POSITION YAW = %.4f \n", initial_position.yaw);
 	printf("\n");
 
-	int32_t position_global = local_data.position_target_global_int.lat_int;
-	int32_t position_global = local_data.position_target_global_int.lon_int;
+	int32_t latitude = local_data.gps_raw_int.lat;
+	int32_t longtitude = local_data.gps_raw_int.lon;
+	float_t altitude_uav = local_data.altitude.altitude_monotonic;
 
 	// we need this before starting the write thread
 
-	printf("Kinh do (longtitude) : %i \n",lon_int);
-	printf("Vi do   (latitude)   : %i \n",lat_int);
-	printf("\n");
+	printf("  Do cao : %f \n ",altitude_uav);
+	printf("  Kinh do (longtitude) : %i \n",longtitude);
+	printf("  Vi do (latitude) : %i \n",latitude);
 
 
 	// --------------------------------------------------------------------------
